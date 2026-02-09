@@ -10,4 +10,6 @@
  */
 export type * from './models/User'
 export type * from './models/Order'
+export type * from './models/TranslateRegion'
+export type * from './models/TranslateRegionLocale'
 export type * from './commonInputTypes'

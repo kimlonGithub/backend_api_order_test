@@ -47,3 +47,13 @@ export type User = Prisma.UserModel
  * 
  */
 export type Order = Prisma.OrderModel
+/**
+ * Model TranslateRegion
+ * 
+ */
+export type TranslateRegion = Prisma.TranslateRegionModel
+/**
+ * Model TranslateRegionLocale
+ * 
+ */
+export type TranslateRegionLocale = Prisma.TranslateRegionLocaleModel

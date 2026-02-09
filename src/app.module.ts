@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { UsersModule } from './users/users.module';
 import { OrdersModule } from './orders/orders.module';
+import { TranslateRegionsModule } from './translate-regions/translate-regions.module';
 
 @Module({
   imports: [
@@ -19,6 +20,8 @@ import { OrdersModule } from './orders/orders.module';
     UsersModule,
     // Orders API + WebSocket gateway for new_order admin notifications
     OrdersModule,
+    // Translate regions and region-locales CRUD
+    TranslateRegionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

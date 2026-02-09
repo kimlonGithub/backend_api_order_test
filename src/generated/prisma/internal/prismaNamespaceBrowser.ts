@@ -52,7 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  Order: 'Order'
+  Order: 'Order',
+  TranslateRegion: 'TranslateRegion',
+  TranslateRegionLocale: 'TranslateRegionLocale'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -90,6 +92,30 @@ export const OrderScalarFieldEnum = {
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+export const TranslateRegionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  nativeName: 'nativeName',
+  flagUrl: 'flagUrl',
+  defaultLocale: 'defaultLocale',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TranslateRegionScalarFieldEnum = (typeof TranslateRegionScalarFieldEnum)[keyof typeof TranslateRegionScalarFieldEnum]
+
+
+export const TranslateRegionLocaleScalarFieldEnum = {
+  regionId: 'regionId',
+  localeCode: 'localeCode',
+  sortOrder: 'sortOrder'
+} as const
+
+export type TranslateRegionLocaleScalarFieldEnum = (typeof TranslateRegionLocaleScalarFieldEnum)[keyof typeof TranslateRegionLocaleScalarFieldEnum]
 
 
 export const SortOrder = {

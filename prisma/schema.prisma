@@ -31,3 +31,29 @@ model Order {
 
   @@map("orders")
 }
+
+// Translate regions (Option B: locales in separate junction table)
+model TranslateRegion {
+  id            String                  @id @db.VarChar(32)
+  name          String                  @db.VarChar(255)
+  nativeName    String                  @map("native_name") @db.VarChar(255)
+  flagUrl       String                  @map("flag_url") @db.VarChar(512)
+  defaultLocale String                  @map("default_locale") @db.VarChar(16)
+  isActive      Boolean                 @default(true) @map("is_active")
+  sortOrder     Int?                    @map("sort_order")
+  createdAt     DateTime                @default(now()) @map("created_at")
+  updatedAt     DateTime                @updatedAt @map("updated_at")
+  locales       TranslateRegionLocale[]
+
+  @@map("translate_regions")
+}
+
+model TranslateRegionLocale {
+  regionId   String          @map("region_id") @db.VarChar(32)
+  localeCode String          @map("locale_code") @db.VarChar(16)
+  sortOrder  Int             @default(0) @map("sort_order")
+  region     TranslateRegion @relation(fields: [regionId], references: [id], onDelete: Cascade)
+
+  @@id([regionId, localeCode])
+  @@map("translate_region_locales")
+}

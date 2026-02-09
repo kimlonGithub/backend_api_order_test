@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.3.0",
   "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// Example User model\nmodel User {\n  id        Int      @id @default(autoincrement())\n  name      String\n  email     String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  orders    Order[]\n\n  @@map(\"users\")\n}\n\nmodel Order {\n  id         Int      @id @default(autoincrement())\n  customerId Int?\n  total      Decimal  @db.Decimal(10, 2)\n  createdAt  DateTime @default(now())\n  customer   User?    @relation(fields: [customerId], references: [id])\n\n  @@map(\"orders\")\n}\n",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// Example User model\nmodel User {\n  id        Int      @id @default(autoincrement())\n  name      String\n  email     String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  orders    Order[]\n\n  @@map(\"users\")\n}\n\nmodel Order {\n  id         Int      @id @default(autoincrement())\n  customerId Int?\n  total      Decimal  @db.Decimal(10, 2)\n  createdAt  DateTime @default(now())\n  customer   User?    @relation(fields: [customerId], references: [id])\n\n  @@map(\"orders\")\n}\n\n// Translate regions (Option B: locales in separate junction table)\nmodel TranslateRegion {\n  id            String                  @id @db.VarChar(32)\n  name          String                  @db.VarChar(255)\n  nativeName    String                  @map(\"native_name\") @db.VarChar(255)\n  flagUrl       String                  @map(\"flag_url\") @db.VarChar(512)\n  defaultLocale String                  @map(\"default_locale\") @db.VarChar(16)\n  isActive      Boolean                 @default(true) @map(\"is_active\")\n  sortOrder     Int?                    @map(\"sort_order\")\n  createdAt     DateTime                @default(now()) @map(\"created_at\")\n  updatedAt     DateTime                @updatedAt @map(\"updated_at\")\n  locales       TranslateRegionLocale[]\n\n  @@map(\"translate_regions\")\n}\n\nmodel TranslateRegionLocale {\n  regionId   String          @map(\"region_id\") @db.VarChar(32)\n  localeCode String          @map(\"locale_code\") @db.VarChar(16)\n  sortOrder  Int             @default(0) @map(\"sort_order\")\n  region     TranslateRegion @relation(fields: [regionId], references: [id], onDelete: Cascade)\n\n  @@id([regionId, localeCode])\n  @@map(\"translate_region_locales\")\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"orders\",\"kind\":\"object\",\"type\":\"Order\",\"relationName\":\"OrderToUser\"}],\"dbName\":\"users\"},\"Order\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"customerId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"total\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"customer\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"OrderToUser\"}],\"dbName\":\"orders\"}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"orders\",\"kind\":\"object\",\"type\":\"Order\",\"relationName\":\"OrderToUser\"}],\"dbName\":\"users\"},\"Order\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"customerId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"total\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"customer\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"OrderToUser\"}],\"dbName\":\"orders\"},\"TranslateRegion\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nativeName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"native_name\"},{\"name\":\"flagUrl\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"flag_url\"},{\"name\":\"defaultLocale\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"default_locale\"},{\"name\":\"isActive\",\"kind\":\"scalar\",\"type\":\"Boolean\",\"dbName\":\"is_active\"},{\"name\":\"sortOrder\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"sort_order\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"created_at\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\",\"dbName\":\"updated_at\"},{\"name\":\"locales\",\"kind\":\"object\",\"type\":\"TranslateRegionLocale\",\"relationName\":\"TranslateRegionToTranslateRegionLocale\"}],\"dbName\":\"translate_regions\"},\"TranslateRegionLocale\":{\"fields\":[{\"name\":\"regionId\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"region_id\"},{\"name\":\"localeCode\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"locale_code\"},{\"name\":\"sortOrder\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"sort_order\"},{\"name\":\"region\",\"kind\":\"object\",\"type\":\"TranslateRegion\",\"relationName\":\"TranslateRegionToTranslateRegionLocale\"}],\"dbName\":\"translate_region_locales\"}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -195,6 +195,26 @@ export interface PrismaClient<
     * ```
     */
   get order(): Prisma.OrderDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.translateRegion`: Exposes CRUD operations for the **TranslateRegion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TranslateRegions
+    * const translateRegions = await prisma.translateRegion.findMany()
+    * ```
+    */
+  get translateRegion(): Prisma.TranslateRegionDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.translateRegionLocale`: Exposes CRUD operations for the **TranslateRegionLocale** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TranslateRegionLocales
+    * const translateRegionLocales = await prisma.translateRegionLocale.findMany()
+    * ```
+    */
+  get translateRegionLocale(): Prisma.TranslateRegionLocaleDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

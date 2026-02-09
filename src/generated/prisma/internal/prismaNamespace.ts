@@ -385,7 +385,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   User: 'User',
-  Order: 'Order'
+  Order: 'Order',
+  TranslateRegion: 'TranslateRegion',
+  TranslateRegionLocale: 'TranslateRegionLocale'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -401,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "order"
+    modelProps: "user" | "order" | "translateRegion" | "translateRegionLocale"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -553,6 +555,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    TranslateRegion: {
+      payload: Prisma.$TranslateRegionPayload<ExtArgs>
+      fields: Prisma.TranslateRegionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TranslateRegionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TranslateRegionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload>
+        }
+        findFirst: {
+          args: Prisma.TranslateRegionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TranslateRegionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload>
+        }
+        findMany: {
+          args: Prisma.TranslateRegionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload>[]
+        }
+        create: {
+          args: Prisma.TranslateRegionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload>
+        }
+        createMany: {
+          args: Prisma.TranslateRegionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TranslateRegionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload>[]
+        }
+        delete: {
+          args: Prisma.TranslateRegionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload>
+        }
+        update: {
+          args: Prisma.TranslateRegionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload>
+        }
+        deleteMany: {
+          args: Prisma.TranslateRegionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TranslateRegionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TranslateRegionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload>[]
+        }
+        upsert: {
+          args: Prisma.TranslateRegionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionPayload>
+        }
+        aggregate: {
+          args: Prisma.TranslateRegionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTranslateRegion>
+        }
+        groupBy: {
+          args: Prisma.TranslateRegionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TranslateRegionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TranslateRegionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TranslateRegionCountAggregateOutputType> | number
+        }
+      }
+    }
+    TranslateRegionLocale: {
+      payload: Prisma.$TranslateRegionLocalePayload<ExtArgs>
+      fields: Prisma.TranslateRegionLocaleFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.TranslateRegionLocaleFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.TranslateRegionLocaleFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload>
+        }
+        findFirst: {
+          args: Prisma.TranslateRegionLocaleFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.TranslateRegionLocaleFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload>
+        }
+        findMany: {
+          args: Prisma.TranslateRegionLocaleFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload>[]
+        }
+        create: {
+          args: Prisma.TranslateRegionLocaleCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload>
+        }
+        createMany: {
+          args: Prisma.TranslateRegionLocaleCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.TranslateRegionLocaleCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload>[]
+        }
+        delete: {
+          args: Prisma.TranslateRegionLocaleDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload>
+        }
+        update: {
+          args: Prisma.TranslateRegionLocaleUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload>
+        }
+        deleteMany: {
+          args: Prisma.TranslateRegionLocaleDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.TranslateRegionLocaleUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.TranslateRegionLocaleUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload>[]
+        }
+        upsert: {
+          args: Prisma.TranslateRegionLocaleUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$TranslateRegionLocalePayload>
+        }
+        aggregate: {
+          args: Prisma.TranslateRegionLocaleAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateTranslateRegionLocale>
+        }
+        groupBy: {
+          args: Prisma.TranslateRegionLocaleGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TranslateRegionLocaleGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.TranslateRegionLocaleCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.TranslateRegionLocaleCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -611,6 +761,30 @@ export const OrderScalarFieldEnum = {
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
+
+
+export const TranslateRegionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  nativeName: 'nativeName',
+  flagUrl: 'flagUrl',
+  defaultLocale: 'defaultLocale',
+  isActive: 'isActive',
+  sortOrder: 'sortOrder',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TranslateRegionScalarFieldEnum = (typeof TranslateRegionScalarFieldEnum)[keyof typeof TranslateRegionScalarFieldEnum]
+
+
+export const TranslateRegionLocaleScalarFieldEnum = {
+  regionId: 'regionId',
+  localeCode: 'localeCode',
+  sortOrder: 'sortOrder'
+} as const
+
+export type TranslateRegionLocaleScalarFieldEnum = (typeof TranslateRegionLocaleScalarFieldEnum)[keyof typeof TranslateRegionLocaleScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -696,6 +870,13 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
  * Reference to a field of type 'Decimal[]'
  */
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -809,6 +990,8 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   order?: Prisma.OrderOmit
+  translateRegion?: Prisma.TranslateRegionOmit
+  translateRegionLocale?: Prisma.TranslateRegionLocaleOmit
 }
 
 /* Types for Logging */
