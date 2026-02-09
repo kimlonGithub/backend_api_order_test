@@ -172,11 +172,18 @@ If the database (e.g. Render **order_db**) has never had migrations run against 
 - `GET /test-db` → **200** (connection and raw query succeed).
 - `GET /users` or `POST /users` → **500** (Prisma fails when accessing the missing table).
 
-**Fix:** Run Prisma migrations against the same database used in production:
+**Fix (choose one):**
 
-```bash
-# Ensure DATABASE_URL in .env points to your production DB (e.g. Render order_db)
-npx prisma migrate deploy
-```
+1. **Render (recommended):** In the Render dashboard for **backend_api_order_test**, set **Start Command** to:
+   ```bash
+   npm run start:prod:with-migrate
+   ```
+   This runs `prisma migrate deploy` before starting the app, so the `users` table (and any other schema) is created or updated on each deploy. Then trigger a deploy (or redeploy) so the change takes effect.
 
-After migrations are applied, the users endpoints should work (assuming no other configuration or code errors). For any remaining 500s, check the Nest/Node server logs for the exact Prisma or database error.
+2. **One-time from your machine:** Point `DATABASE_URL` at the Render PostgreSQL URL (from Render → order_db → Connect), then run:
+   ```bash
+   npx prisma migrate deploy
+   ```
+   After that, restart the API service on Render so it picks up the existing schema.
+
+**Error reference:** If you see `P2021` / `relation "public.users" does not exist`, the database is missing the schema; applying migrations as above resolves it.
