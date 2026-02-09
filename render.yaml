@@ -1,0 +1,14 @@
+# Render Blueprint: ensures DB migrations run before each deploy.
+# See https://render.com/docs/blueprint-spec
+# If this repo is not yet managed by a Blueprint, set the same commands in the dashboard:
+# - Build: npm install && npm run build
+# - Pre-Deploy: npx prisma migrate deploy
+# - Start: npm run start:prod
+
+services:
+  - type: web
+    name: backend_api_order_test
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    preDeployCommand: npx prisma migrate deploy

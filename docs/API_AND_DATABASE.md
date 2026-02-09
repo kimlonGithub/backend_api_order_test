@@ -6,9 +6,9 @@ This document describes how the main API endpoints interact with the database, a
 
 ## Base URL
 
-- Local: `http://localhost:3000` (or the `PORT` in your `.env`)
-- Production: use your deployed base URL (e.g. `{{pro_url}}` in Postman)
-- Swagger: `http://localhost:3000/api` when the app is running
+- **Local:** `http://localhost:3000` (or the `PORT` in your `.env`)
+- **Production:** `https://backend-api-order-test.onrender.com` (use this as `{{pro_url}}` in Postman or env)
+- **Swagger:** `http://localhost:3000/api` when running locally
 
 ---
 
@@ -172,18 +172,9 @@ If the database (e.g. Render **order_db**) has never had migrations run against 
 - `GET /test-db` → **200** (connection and raw query succeed).
 - `GET /users` or `POST /users` → **500** (Prisma fails when accessing the missing table).
 
-**Fix (choose one):**
+**Fix for production (Render):**  
+1. The repo includes **`render.yaml`** with a **Pre-Deploy Command** so migrations run on every deploy. Push and deploy. If the service is not managed by the Blueprint, in Render set **Pre-Deploy Command** to `npx prisma migrate deploy` and **Start Command** to `npm run start:prod`, then run a Manual Deploy.  
+2. **One-time from your machine:** Set `DATABASE_URL` to the Render PostgreSQL URL, run `npx prisma migrate deploy`, then restart the API on Render.  
 
-1. **Render (recommended):** In the Render dashboard for **backend_api_order_test**, set **Start Command** to:
-   ```bash
-   npm run start:prod:with-migrate
-   ```
-   This runs `prisma migrate deploy` before starting the app, so the `users` table (and any other schema) is created or updated on each deploy. Then trigger a deploy (or redeploy) so the change takes effect.
 
-2. **One-time from your machine:** Point `DATABASE_URL` at the Render PostgreSQL URL (from Render → order_db → Connect), then run:
-   ```bash
-   npx prisma migrate deploy
-   ```
-   After that, restart the API service on Render so it picks up the existing schema.
-
-**Error reference:** If you see `P2021` / `relation "public.users" does not exist`, the database is missing the schema; applying migrations as above resolves it.
+**Error reference:** `P2021` / `relation "public.users" does not exist` means the schema is missing; running migrations (Pre-Deploy or manually) resolves it.

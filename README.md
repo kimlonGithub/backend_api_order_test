@@ -114,6 +114,8 @@ npm run dev:start
 
 The application will start on `http://localhost:5000` (or the port specified in `.env`) with hot-reload enabled.
 
+**If you see `EADDRINUSE: address already in use` on port 3000:** another process is using that port. Either run `npm run fix:port` to free it, then start the app again, or use a different port: `PORT=3001 npm run start:dev`.
+
 ### Production Mode
 
 ```bash
