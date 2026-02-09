@@ -22,14 +22,16 @@ async function bootstrap() {
   // Swagger / OpenAPI documentation at /api
   const config = new DocumentBuilder()
     .setTitle('Project API')
-    .setDescription('API for users, orders, and health checks. WebSocket: admin namespace emits `new_order` on order create.')
+    .setDescription(
+      'API for users, orders, and health checks. WebSocket: admin namespace emits `new_order` on order create.',
+    )
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  const port = process.env.PORT ?? 5000;
-  await app.listen(port);
+  const port = process.env.PORT ?? 3000;
+  await app.listen(port, '0.0.0.0'); // listen on all interfaces to allow external access
   console.log(`🚀 Application is running on: http://localhost:${port}`);
   console.log(`📚 Swagger UI: http://localhost:${port}/api`);
 }

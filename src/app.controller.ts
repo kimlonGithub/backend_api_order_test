@@ -20,7 +20,10 @@ export class AppController {
 
   @Get('test-db')
   @ApiOperation({ summary: 'Test database connection' })
-  @ApiResponse({ status: 200, description: 'Database connection status and server time.' })
+  @ApiResponse({
+    status: 200,
+    description: 'Database connection status and server time.',
+  })
   async testDatabase() {
     try {
       const result = await this.prisma.$queryRaw<
