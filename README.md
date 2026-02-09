@@ -331,6 +331,8 @@ This will open a web interface at `http://localhost:5555` where you can:
 - Create, update, and delete records
 - Explore relationships
 
+If Prisma Studio shows **"No Tables Found"**, the database has no tables yet. Run `npm run prisma:migrate:deploy` or `npm run prisma:migrate:dev`, then restart Studio. See [docs/PRISMA_STUDIO_NO_TABLES.md](docs/PRISMA_STUDIO_NO_TABLES.md).
+
 ### Automated Testing
 
 #### Unit Tests
